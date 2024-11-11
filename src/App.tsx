@@ -4,8 +4,9 @@ import UserLoginProvider from "./common/contexts/UserToken";
 import { StyleGlobal } from "./common/styles/StyleGlobal";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import Home from "./pages/Home";
 
-export default function App() {
+const App: React.FC = () => {
   return (
     <> 
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
@@ -14,6 +15,8 @@ export default function App() {
           <Routes>
             <Route path="/login" element={<SignIn />} />
             <Route path="/cadastro" element={<SignUp />} />
+            <Route path="/register" element={<SignUp />} />
+            <Route path="/" element={<Home />} />
           </Routes>
         </UserLoginProvider>
       </BrowserRouter>
@@ -21,3 +24,5 @@ export default function App() {
     </>
   );
 }
+
+export default App;

@@ -6,25 +6,30 @@ import {
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { ChangeEvent, MouseEvent } from "react";
+
+interface PasswordInputProps {
+  setValues: (field: string, value: any) => void;
+  values: { [key: string]: any };
+  inputLabel: string;
+  inputState: string;
+}
 
 export default function PasswordInput({
   setValues,
   values,
   inputLabel,
   inputState,
-}) {
-  const handleChange = (props) => (event) => {
-    setValues({ ...values, [props.inputState]: event.target.value });
+}: PasswordInputProps) {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setValues(inputState, event.target.value);
   };
 
   const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
+    setValues("showPassword", !values.showPassword);
   };
 
-  const handleMouseDownPassword = (event) => {
+  const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
 
@@ -34,8 +39,8 @@ export default function PasswordInput({
       <OutlinedInput
         id={`input${inputState}`}
         type={values.showPassword ? "text" : "password"}
-        value={values[inputState]}
-        onChange={handleChange({ inputState })}
+        value={values[inputState] || ""}
+        onChange={handleChange}
         endAdornment={
           <InputAdornment position="end">
             <IconButton
