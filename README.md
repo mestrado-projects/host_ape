@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# Sistema de Reservas de Apartamentos
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este sistema web, desenvolvido com React, permite a gestão de reservas de apartamentos. Ele está estruturado de acordo com os critérios arquitetônicos MVC e REST, garantindo uma separação clara entre as funções do sistema e uma experiência de usuário otimizada.
 
-## Available Scripts
+## Requisitos Funcionais
 
-In the project directory, you can run:
+1. **Escolher Apartamento**  
+   - O sistema deve permitir ao visitante selecionar um apartamento específico para visualização de detalhes.
+   - **Endpoints**:
+     - **GET /apartamentos**: Retorna a lista de apartamentos disponíveis.
+     - **GET /apartamento/{id}**: Retorna os detalhes de um apartamento específico.
 
-### `npm start`
+2. **Visualização de Estado da Reserva**  
+   - **Visitante (Guest)**: Visualização da landing page com informações básicas sobre o local e fotos.
+   - **Hóspede**: Visualização de informações adicionais como senha do Wi-Fi e das portas, regras da casa, e opções turísticas (acessíveis até a data de check-out).
+   - **Administrador (Admin)**: Visualização e acesso para cadastrar novas reservas.
+   - **Endpoints**:
+     - **POST /login**: Realiza a autenticação de usuário com duas roles (Guest e Admin).
+     - **GET /reserva/{id}**: Retorna o status e os detalhes da reserva com base no perfil do usuário autenticado.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. **Landing Page**  
+   - Exibe fotos, ícones informativos, e campos sobre a hospedagem e a localização.
+   - Mostra informações turísticas e permite a seleção de datas de check-in e check-out.
+   - **Endpoints**:
+     - **GET /acomodacao**: Recupera informações da acomodação.
+     - **POST /reserva/solicitar**: Envia uma solicitação de reserva (pode incluir redirecionamento para WhatsApp).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+4. **Informações de Reserva para o Hóspede**  
+   - Exibe dados como endereço, senha do Wi-Fi, senha das portas, regras da casa e opções turísticas integradas ao Google Maps.
+   - **Endpoints**:
+     - **GET /acomodacao**: Recupera informações da acomodação.
+     - **GET /reserva/{id}**: Recupera detalhes da reserva para o hóspede autenticado.
 
-### `npm test`
+5. **Envio de Sugestões ou Comentários**  
+   - Permite ao hóspede enviar feedback e sugestões, incluindo uma opção para solicitar uma nova reserva com desconto.
+   - **Endpoint**:
+     - **POST /feedback**: Recebe sugestões e solicitações de reserva com possibilidade de redirecionamento para WhatsApp com desconto aplicado.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+6. **Formulário para Solicitação de Reserva**  
+   - Disponibiliza um formulário para solicitação de reserva que, ao ser preenchido, envia uma mensagem automática para o WhatsApp.
+   - **Endpoint**:
+     - **POST /reserva/solicitar**: Envia a solicitação de reserva.
 
-### `npm run build`
+7. **Cadastro de Novas Reservas (Admin)**  
+   - Permite ao administrador cadastrar reservas diretamente, gerando logins temporários para novos hóspedes.
+   - **Endpoints**:
+     - **POST /reserva/cadastrar**: Cadastra uma nova reserva.
+     - **PUT /acomodacao/{id}**: Permite ao administrador atualizar informações restritas da acomodação.
+     - **DELETE /acomodacao/{id}**: Remove uma acomodação específica, acesso restrito ao administrador.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+8. **Gerenciamento de Acessos**  
+   - Permite ao administrador gerenciar acessos temporários de hóspedes e desativá-los automaticamente após o check-out.
+   - **Endpoints**:
+     - **POST /acesso/temporario**: Cria um login temporário para o hóspede.
+     - **DELETE /acesso/temporario/{id}**: Remove acesso de hóspedes após o check-out.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+9. **Atualização de Informações de Acomodações**  
+   - Permite ao administrador atualizar informações de acomodações, como endereço, senhas, e regras da casa.
+   - **Endpoint**:
+     - **PUT /acomodacao/{id}**: Atualiza dados de uma acomodação específica.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+10. **Notificação de Submissão de Reserva para o Administrador**  
+   - Notifica o administrador sobre uma nova submissão de reserva, permitindo que ele acompanhe e aprove as solicitações.
+   - **Endpoint**:
+     - **POST /reserva/notificar-admin**: Envia notificação ao administrador sobre uma nova reserva.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
