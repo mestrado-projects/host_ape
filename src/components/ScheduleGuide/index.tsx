@@ -48,9 +48,9 @@ interface StepData {
 }
 
 const steps: StepData[] = [
-    { label: "Primeiro Passo", description: "Descrição aqui...texto aqui", moreText: "Detalhes adicionais para o primeiro passo" },
-    { label: "Segundo Passo", description: "Descrição aqui...texto aqui", moreText: "Detalhes adicionais para o segundo passo" },
-    { label: "Terceiro Passo", description: "Descrição aqui...texto aqui", moreText: "Detalhes adicionais para o terceiro passo" },
+    { label: "Primeiro Passo", description: "Ter tido ao menos uma reserva para ter acesso", moreText: "Para ter acesso aos beneficios exclusivos, você deve ter feito ao menos uma reserva pelo Airbnb" },
+    { label: "Segundo Passo", description: "Escolha uma nova reserva", moreText: "Veja os detalhes, fotos e comodidades para garantir que o apartamento atenda às suas necessidades." },
+    { label: "Terceiro Passo", description: "Faça sua reserva com descontos", moreText: "Se comunique diretamente com o proprietario para ter acesso aos beneficios" },
 ];
 
 export default function SchedulingInstructions() {

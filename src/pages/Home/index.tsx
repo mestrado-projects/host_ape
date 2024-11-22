@@ -5,6 +5,9 @@ import InfoSection from "../../components/InfoSection";
 import Banner from "../../components/Banner";
 import LocalGuideSlider from "../../components/LocalGuideSlider";
 import ScheduleGuide from "../../components/ScheduleGuide";
+import Image from './assets/banner.jpg'
+import FAQs from "../../components/Faq";
+import Footer from "../../components/Footer";
 
 export interface Property {
     id: number;
@@ -53,11 +56,9 @@ export default function Home() {
     return (
         <div>
             <Banner
-                title="Welcome to Our Properties"
-                subtitle="Find your perfect stay with us"
-                backgroundImage="https://via.placeholder.com/1920x400"
-                buttonText="Explore Now"
-                onButtonClick={() => console.log("Explore Now clicked")}
+                title="Já se hospedou conosco? Aproveite ofertas especiais."
+                subtitle="Clientes que já se hospedaram ganham descontos especiais e vantagens únicas na próxima reserva."
+                backgroundImage={Image}
             />
             <ScheduleGuide />
             <PropertiesCards
@@ -68,6 +69,8 @@ export default function Home() {
             <PropertyDetails property={activeProperty} />
             <InfoSection />
             <LocalGuideSlider />
+            <FAQs />
+            <Footer />
         </div>
     );
 }

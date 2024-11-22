@@ -49,10 +49,10 @@ export default function PropertiesCards({
         <>
             <Box textAlign="center" padding="24px 16px">
                 <Typography variant="h4" component="h1" gutterBottom>
-                    Explore Our Properties
+                    Apartamentos
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                    Find the best place to stay for your vacation or business trip.
+                Escolha entre nossas opções exclusivas e aproveite o conforto, a localização ideal e os benefícios pensados para você.
                 </Typography>
             </Box>
 

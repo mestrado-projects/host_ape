@@ -7,6 +7,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Forms from "./pages/Forms";
+import Header from "./components/Header";
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <StyleGlobal />
         <UserLoginProvider>
           <VariableFormProvider>
+            <Header />
             <Routes>
               <Route path="/login" element={<SignIn />} />
               <Route path="/cadastro" element={<SignUp />} />
