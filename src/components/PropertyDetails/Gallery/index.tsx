@@ -38,9 +38,9 @@ export default function Gallery({ property }: PropertyDetailsProps) {
 
     return (
         <ImageColumn>
-            <Typography variant="subtitle2" color="textSecondary" gutterBottom>
+            {/* <Typography variant="subtitle2" color="textSecondary" gutterBottom>
                 Reserva: {property.checkIn} - {property.checkOut}
-            </Typography>
+            </Typography> */}
 
             <ImageGallery
                 items={images}

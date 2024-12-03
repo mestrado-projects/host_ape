@@ -6,15 +6,17 @@ interface LocalGuideCardProps {
     description: string;
     time: string;
     maps: string;
+    image: string;
 }
 
-export default function LocalGuideCard({ title, description, time, maps }: LocalGuideCardProps) {
+export default function LocalGuideCard({ title, description, time, maps, image }: LocalGuideCardProps) {
     return (
         <Card
             variant="outlined"
             sx={{
                 width: 200,
                 position: "relative",
+                margin: "auto",
                 overflow: "hidden",
                 cursor: "pointer",
                 "&:hover .hoverContent": {
@@ -26,7 +28,7 @@ export default function LocalGuideCard({ title, description, time, maps }: Local
             <Box
                 sx={{
                     width: "100%",
-                    height: 100,
+                    height: 150,
                     backgroundColor: "#e0e0e0",
                     borderRadius: 1,
                     display: "flex",
@@ -35,11 +37,13 @@ export default function LocalGuideCard({ title, description, time, maps }: Local
                     fontSize: "2rem",
                     color: "#a0a0a0",
                     marginBottom: "16px",
+                    backgroundImage: `url(${image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
                 }}
             >
-                🖼️
             </Box>
-            <CardContent sx={{ textAlign: "center" }}>
+            <CardContent sx={{ textAlign: "center", minHeight: 190 }}>
                 <Typography variant="h6" component="h3" gutterBottom>
                     {title}
                 </Typography>

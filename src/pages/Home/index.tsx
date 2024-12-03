@@ -69,7 +69,7 @@ export default function Home() {
             <PropertyDetails property={activeProperty} />
             <InfoSection />
             <LocalGuideSlider />
-            <FAQs />
+            <FAQs preview={true} />
             <Footer />
         </div>
     );

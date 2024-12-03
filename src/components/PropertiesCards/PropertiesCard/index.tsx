@@ -17,6 +17,7 @@ export default function PropertiesCard({ title, description, active = false, onC
                 border: active ? "2px solid #3f51b5" : "1px solid #ddd",
                 backgroundColor: active ? "#f0f0f0" : "white",
                 position: "relative",
+                margin: "auto",
                 cursor: "pointer",
                 "&:hover": {
                     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",

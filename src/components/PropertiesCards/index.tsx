@@ -22,6 +22,8 @@ const CarouselContainer = styled("div")({
     },
     ".slick-track": {
         display: "flex",
+        justifyContent: "center",
+        gap: '10px'
     },
 });
 
@@ -37,11 +39,10 @@ export default function PropertiesCards({
         slidesToShow: 3,
         slidesToScroll: 1,
         responsive: [
-            { breakpoint: 1200, settings: { slidesToShow: 5 } },
-            { breakpoint: 900, settings: { slidesToShow: 4 } },
-            { breakpoint: 700, settings: { slidesToShow: 3 } },
-            { breakpoint: 500, settings: { slidesToShow: 2 } },
-            { breakpoint: 350, settings: { slidesToShow: 1 } },
+            { breakpoint: 1200, settings: { slidesToShow: 3 } },
+            { breakpoint: 900, settings: { slidesToShow: 3 } },
+            { breakpoint: 700, settings: { slidesToShow: 2 } },
+            { breakpoint: 500, settings: { slidesToShow: 1 } }
         ],
     };
 

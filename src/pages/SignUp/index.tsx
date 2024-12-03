@@ -5,8 +5,9 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import PasswordInput from "../../components/inputs/PasswordInput";
 import CommonInput from "../../components/inputs/CommonInput";
 import valideRegistration from "../../validations/valideRegistration";
-import logo from "../../common/assets/logo.png";
+import logo from "../../common/assets/home.svg";
 import { ContainerCenterPage, InitContent, ContainerClicks } from "../../common/styles/StyleInitPages";
+import Footer from "../../components/Footer";
 
 interface Values {
   password: string;
@@ -43,39 +44,42 @@ export default function SignUp() {
   }
 
   return (
-    <InitContent>
-      <img src={logo} alt="logo" />
-      <ContainerCenterPage>
-        <h2>Cadastro</h2>
-        <form onSubmit={signUp}>
-          <FormControl fullWidth sx={{ m: 1 }} variant="outlined">
-            <CommonInput
-              setValues={(field, value) => handleSetValues({ [field]: value })}
-              values={values}
-              inputLabel="Email"
-              inputState="email"
-            />
-          </FormControl>
-          {inputsConfident.map((input) => (
-            <FormControl fullWidth sx={{ m: 1 }} variant="outlined" key={input.nameState}>
-              <PasswordInput
+    <>
+      <InitContent>
+        <img height={300} width={300} src={logo} alt="logo" />
+        <ContainerCenterPage>
+          <h2>Cadastro</h2>
+          <form onSubmit={signUp}>
+            <FormControl fullWidth sx={{ m: 1 }} variant="outlined">
+              <CommonInput
                 setValues={(field, value) => handleSetValues({ [field]: value })}
                 values={values}
-                inputLabel={input.name}
-                inputState={input.nameState}
+                inputLabel="Email"
+                inputState="email"
               />
             </FormControl>
-          ))}
-          <ContainerClicks>
-            <Link to="/login">
-              <p>Já possuo cadastro</p>
-            </Link>
-            <LoadingButton loading={loading} variant="contained" type="submit">
-              Cadastrar
-            </LoadingButton>
-          </ContainerClicks>
-        </form>
-      </ContainerCenterPage>
-    </InitContent>
+            {inputsConfident.map((input) => (
+              <FormControl fullWidth sx={{ m: 1 }} variant="outlined" key={input.nameState}>
+                <PasswordInput
+                  setValues={(field, value) => handleSetValues({ [field]: value })}
+                  values={values}
+                  inputLabel={input.name}
+                  inputState={input.nameState}
+                />
+              </FormControl>
+            ))}
+            <ContainerClicks>
+              <Link to="/login">
+                <p>Já possuo cadastro</p>
+              </Link>
+              <LoadingButton loading={loading} variant="contained" type="submit">
+                Cadastrar
+              </LoadingButton>
+            </ContainerClicks>
+          </form>
+        </ContainerCenterPage>
+      </InitContent>
+      <Footer />
+    </>
   );
 }

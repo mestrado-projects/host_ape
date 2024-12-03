@@ -7,14 +7,16 @@ import {
   Typography,
   Menu,
   Divider,
-  TextField,
-  Button,
-  Link,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import HomeIcon from "@mui/icons-material/Home";
+import LoginForm from "../inputs/LoginForm";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -22,6 +24,12 @@ export default function Header() {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleHomeClick = () => {
+    if (location.pathname !== "/") {
+      navigate("/");
+    }
   };
 
   return (
@@ -38,12 +46,23 @@ export default function Header() {
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
+        <Box>
+          {location.pathname !== "/" && (
+            <IconButton onClick={handleHomeClick} sx={{ color: "white" }}>
+              <HomeIcon />
+            </IconButton>
+          )}
+        </Box>
+
         <Typography variant="h6" component="div">
-          
         </Typography>
 
         <Box>
-          <IconButton edge="end" onClick={handleMenuOpen} sx={{ color: "white" }}>
+          <IconButton
+            edge="end"
+            onClick={handleMenuOpen}
+            sx={{ color: "white" }}
+          >
             <AccountCircleIcon />
           </IconButton>
           <Menu
@@ -62,27 +81,10 @@ export default function Header() {
           >
             <Box sx={{ padding: "16px", minWidth: "250px" }}>
               <Typography variant="subtitle1" gutterBottom>
-                Login
+                Já possui reserva? Faça Login
               </Typography>
               <Divider sx={{ marginBottom: "8px" }} />
-              <TextField label="Email" fullWidth margin="dense" variant="outlined" />
-              <TextField
-                label="Password"
-                type="password"
-                fullWidth
-                margin="dense"
-                variant="outlined"
-              />
-              <Button variant="contained" color="primary" fullWidth sx={{ marginTop: "16px" }}>
-                Login
-              </Button>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                sx={{ marginTop: "8px", textAlign: "center" }}
-              >
-                Não tem conta? <Link href="/cadastro">Entre em contato</Link>
-              </Typography>
+              <LoginForm />
             </Box>
           </Menu>
         </Box>

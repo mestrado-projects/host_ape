@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const InitContent = styled.div`
   height: 100vh;
+  min-height: 750px;
 
   display: flex;
   flex-direction: column;
@@ -15,7 +16,6 @@ const InitContent = styled.div`
 const ContainerCenterPage = styled.div`
   height: 100%;
   width: 464px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
