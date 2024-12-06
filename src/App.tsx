@@ -8,6 +8,8 @@ import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Forms from "./pages/Forms";
 import Header from "./components/Header";
+import FaqPage from "./pages/FaqPage";
+import Property from "./pages/Property";
 
 const App: React.FC = () => {
   return (
@@ -23,6 +25,8 @@ const App: React.FC = () => {
               <Route path="/register" element={<SignUp />} />
               <Route path="/forms" element={<Forms />} />
               <Route path="/" element={<Home />} />
+              <Route path="/propriedade/:id" element={<Property />} />
+              <Route path="/faq" element={<FaqPage />} />
             </Routes>
           </VariableFormProvider>
         </UserLoginProvider>

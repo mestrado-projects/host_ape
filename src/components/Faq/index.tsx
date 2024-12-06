@@ -5,15 +5,20 @@ import {
     Accordion,
     AccordionSummary,
     AccordionDetails,
+    Link,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
+interface FaqProps {
+    preview: boolean;
+}
 
 interface FAQ {
     question: string;
     answer: string;
 }
 
-const faqData: FAQ[] = [
+const faqPreview: FAQ[] = [
     {
         question: "Onde posso acessar os detalhes da hospedagem?",
         answer:
@@ -22,7 +27,7 @@ const faqData: FAQ[] = [
     {
         question: "Quem devo contactar em caso de problemas no imóvel?",
         answer:
-        "Caso tenha problemas no imóvel, você pode entrar em contato diretamente com o anfitrião através das informações fornecidas após a reserva. Se necessário, nosso suporte está disponível para ajudar.",
+        "Caso tenha problemas no imóvel, você pode entrar em contato diretamente com o anfitrião através das informações fornecidas após a reserva. Se necessário, existe um contato adicional caso o primeiro esteja indisponivel",
     },
     {
         question: "Como recebo as instruções de chegada ao local?",
@@ -31,10 +36,18 @@ const faqData: FAQ[] = [
     },
 ];
 
-export default function FAQs() {
+const faqData: FAQ[] = [
+    {
+        question: "Posso solicitar limpeza do apartamento durante minha estadia?",
+        answer:
+        "Claro! Temos contatos de confiança que podemos oferecer para agendamento",
+    }
+];
+
+export default function FAQs({preview}: FaqProps) {
     return (
         <Box sx={{ maxWidth: "1200px", margin: "0 auto", padding: "32px" }}>
-        {/* Title Section */}
+
         <Box sx={{ textAlign: "left", marginBottom: "24px" }}>
             <Typography variant="h4" component="h1" gutterBottom>
             Dúvidas Frequentes
@@ -46,8 +59,7 @@ export default function FAQs() {
             </Typography>
         </Box>
 
-        {/* Accordion Section */}
-        {faqData.map((faq, index) => (
+        {faqPreview.map((faq, index) => (
             <Accordion key={index}>
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -63,6 +75,29 @@ export default function FAQs() {
             </AccordionDetails>
             </Accordion>
         ))}
+
+        {preview ? (
+            <Box marginTop={3} textAlign={"right"}>
+                <Link href="/faq" underline="hover">
+                    Mostrar mais
+                </Link>
+            </Box>
+        ): <>{faqData.map((faq, index) => (
+            <Accordion key={index}>
+            <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls={`panel${index + 1}-content`}
+                id={`panel${index + 1}-header`}
+            >
+                <Typography variant="subtitle1">{faq.question}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+                <Typography variant="body2" color="textSecondary">
+                {faq.answer}
+                </Typography>
+            </AccordionDetails>
+            </Accordion>
+        ))}</>}
         </Box>
     );
 }

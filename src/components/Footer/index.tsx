@@ -1,10 +1,11 @@
 import React from "react";
 import { Box, Typography, Link } from "@mui/material";
 import styled from "styled-components";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const FooterContainer = styled(Box)({
-  backgroundColor: "#333", // Fundo escuro
-  color: "#fff", // Texto branco
+  backgroundColor: "#333",
+  color: "#fff",
   padding: "32px 16px",
 });
 
@@ -13,8 +14,8 @@ const ContentWrapper = styled(Box)({
   margin: "0 auto",
   padding: "0 32px",
   display: "flex",
-  gap: "60px", // Espaçamento reduzido entre colunas
-  alignItems: "start", // Alinha o conteúdo ao topo
+  gap: "60px",
+  alignItems: "start",
 });
 
 const Column = styled(Box)({
@@ -23,43 +24,70 @@ const Column = styled(Box)({
 });
 
 export default function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleScrollToTop = () => {
+    if (location.pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate("/");
+    }
+  };
+
+  const redirectToWhatsApp = () => {
+    window.open(
+      "https://wa.me/5581997359190",
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
   return (
     <FooterContainer>
       <ContentWrapper>
-        {/* Coluna 1 */}
         <Column>
           <Typography variant="subtitle1">
-            <Link href="#" color="inherit" underline="hover">
+            <Link
+              onClick={handleScrollToTop}
+              color="inherit"
+              underline="hover"
+              sx={{ cursor: "pointer" }}
+            >
               Início
             </Link>
           </Typography>
           <Typography variant="subtitle1">
-            <Link href="#" color="inherit" underline="hover">
+            <Link
+              onClick={() => navigate("/login")}
+              color="inherit"
+              underline="hover"
+              sx={{ cursor: "pointer" }}
+            >
               Acessar Conta
-            </Link>
-          </Typography>
-          <Typography variant="subtitle1">
-            <Link href="#" color="inherit" underline="hover">
-              Apartamentos
             </Link>
           </Typography>
         </Column>
 
-        {/* Coluna 2 */}
         <Column>
           <Typography variant="subtitle1">
-            <Link href="#" color="inherit" underline="hover">
-              Depoimentos
-            </Link>
-          </Typography>
-          <Typography variant="subtitle1">
-            <Link href="#" color="inherit" underline="hover">
+            <Link
+              onClick={() => navigate("/faq")}
+              color="inherit"
+              underline="hover"
+              sx={{ cursor: "pointer" }}
+            >
               Dúvidas Frequentes
             </Link>
           </Typography>
           <Typography variant="subtitle1">
-            <Link href="#" color="inherit" underline="hover">
-              Contato
+            <Link
+              onClick={redirectToWhatsApp}
+              color="inherit"
+              underline="hover"
+              sx={{ cursor: "pointer" }}
+            >
+              Contato: (81) 99735-9190
             </Link>
           </Typography>
         </Column>

@@ -2,6 +2,10 @@ import axios, { AxiosRequestConfig } from "axios";
 
 const BASE_URL = process.env.REACT_APP_API_URL as string;
 
+const axiosInstance = axios.create({
+  baseURL: BASE_URL,
+});
+
 interface AuthValues {
   email: string;
   password: string;
@@ -17,44 +21,44 @@ function config(token: string): AxiosRequestConfig {
 
 function authLogin(values: AuthValues) {
   const { email, password } = values;
-  return axios.post(`${BASE_URL}/sign-in`, { email, password });
+  return axiosInstance.post("/sign-in", { email, password });
 }
 
 function authSignUp(values: AuthValues) {
   const { email, password } = values;
-  return axios.post(`${BASE_URL}/sign-up`, { email, password });
+  return axiosInstance.post("/sign-up", { email, password });
 }
 
-function getProperties(token: string) {
-  return axios.get(`${BASE_URL}/properties`, config(token));
+function getApartments() {
+  return axiosInstance.get("/apartments");
 }
 
-function getAccommodationInfo(token: string) {
-  return axios.get(`${BASE_URL}/accommodation`, config(token));
+function getApartmentById(id: string) {
+  return axiosInstance.get(`/apartments/${id}`);
 }
 
 function getReservationById(token: string, id: string | number) {
-  return axios.get(`${BASE_URL}/reservation/${id}`, config(token));
+  return axiosInstance.get(`/reservation/${id}`, config(token));
 }
 
 function requestReservation(data: ReservationData, token: string) {
-  return axios.post(`${BASE_URL}/reservation/request`, data, config(token));
+  return axiosInstance.post("/reservation/request", data, config(token));
 }
 
 function createReservation(data: ReservationData, token: string) {
-  return axios.post(`${BASE_URL}/reservation/create`, data, config(token));
+  return axiosInstance.post("/reservation/create", data, config(token));
 }
 
 const inputAddInformations = {
-  getProperties,
-  getAccommodationInfo,
+  getApartments,
+  getApartmentById,
 };
 
 const api = {
   authLogin,
   authSignUp,
-  getProperties,
-  getAccommodationInfo,
+  getApartments,
+  getApartmentById,
   getReservationById,
   requestReservation,
   createReservation,

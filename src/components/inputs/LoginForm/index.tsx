@@ -73,7 +73,7 @@ export default function LoginForm() {
                 </ContainerClicks>
             </form>
             <Typography variant="body2" color="textSecondary" sx={{ marginTop: "8px", textAlign: "center" }}>
-                Don't have an account? <Link href="/cadastro">Sign Up</Link>
+                Primeira Reserva? <Link href="/cadastro">Entre em contato</Link>
             </Typography>
         </>
     );
