@@ -3,6 +3,7 @@ import { Box, Typography, Button } from "@mui/material";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { PropertyDetailed } from "../index";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 interface PropertyDetailsProps {
     property: PropertyDetailed;
@@ -36,7 +37,7 @@ export default function InfoColumn({ property }: PropertyDetailsProps) {
                 {property.name}
             </Typography>
 
-            <Box mb={2}>
+            <Box mb={2} gap={1} display={"flex"} flexWrap={"wrap"}>
                 <IconInfo>📍 {property.simpleLocation}</IconInfo>
                 <IconInfo>🛏️ {property.beds} camas</IconInfo>
                 <IconInfo>🍽️ {property.kitchen ? "Cozinha disponível" : "Sem cozinha"}</IconInfo>
@@ -46,12 +47,17 @@ export default function InfoColumn({ property }: PropertyDetailsProps) {
             <Typography variant="h6" gutterBottom>
                 Sobre
             </Typography>
-            <Typography variant="body1" color="textSecondary" paragraph>
+            <Typography variant="body1" color="textSecondary" gutterBottom>
                 {property.about}
             </Typography>
 
-            <Button variant="text" color="primary" onClick={handleViewMore}>
-                Ver Mais
+            <Button
+                variant="text"
+                color="primary"
+                onClick={handleViewMore}
+                startIcon={<OpenInNewIcon />}
+            >
+                TUDO SOBRE A PROPRIEDADE
             </Button>
         </TextColumn>
     );

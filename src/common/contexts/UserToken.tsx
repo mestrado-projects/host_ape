@@ -1,4 +1,4 @@
-import { useState, createContext, ReactNode } from "react";
+import { useState, createContext, ReactNode, useEffect } from "react";
 
 export interface UserTokenContextType {
   token: string | false;
@@ -6,24 +6,42 @@ export interface UserTokenContextType {
   logout: () => void;
 }
 
-export const UserToken = createContext<UserTokenContextType | undefined>(undefined);
+export const UserToken = createContext<UserTokenContextType | undefined>(
+  undefined
+);
 
 interface UserLoginProviderProps {
   children: ReactNode;
 }
 
 export default function UserLoginProvider({ children }: UserLoginProviderProps) {
-  const [token, setToken] = useState<string | false>(
-    JSON.parse(localStorage.getItem("token") || "false")
-  );
+  const [token, setToken] = useState<string | false>(() => {
+    try {
+      const storedToken = localStorage.getItem("token");
+      return storedToken ? JSON.parse(storedToken) : false;
+    } catch (error) {
+      console.error("Error reading token from localStorage:", error);
+      return false;
+    }
+  });
 
-  function setAndPersistToken(token: string) {
-    setToken(token);
-    localStorage.setItem("token", JSON.stringify(token));
+  useEffect(() => {
+    try {
+      if (token) {
+        localStorage.setItem("token", JSON.stringify(token));
+      } else {
+        localStorage.removeItem("token");
+      }
+    } catch (error) {
+      console.error("Error writing token to localStorage:", error);
+    }
+  }, [token]);
+
+  function setAndPersistToken(newToken: string) {
+    setToken(newToken);
   }
 
   function logout() {
-    localStorage.clear();
     setToken(false);
   }
 

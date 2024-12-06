@@ -51,7 +51,6 @@ export default function InfoSection({ property, isLoggedIn }: InfoSectionProps) 
             </Typography>
 
             <InfoSectionContainer $isLoggedIn={isLoggedIn}>
-                {/* Rules Section */}
                 <Column>
                     <Typography variant="h6" gutterBottom>
                         Regras da Casa
@@ -69,7 +68,6 @@ export default function InfoSection({ property, isLoggedIn }: InfoSectionProps) 
                     </List>
                 </Column>
 
-                {/* Security Section */}
                 {isLoggedIn ? (
                     <>
                         <Column>
@@ -85,7 +83,6 @@ export default function InfoSection({ property, isLoggedIn }: InfoSectionProps) 
                             </List>
                         </Column>
 
-                        {/* Contacts Section */}
                         <Column>
                             <Typography variant="h6" gutterBottom>
                                 Contatos

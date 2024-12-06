@@ -2,13 +2,17 @@ import React, { useState } from "react";
 import { Box, Stepper, Step, StepLabel, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-const Container = styled(Box)({
+const Container = styled(Box)(({ theme }) => ({
     backgroundColor: "#e0e0e0",
-    padding: "24px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-});
+    paddingTop: "20px",
+
+    [theme.breakpoints.up("sm")]: {
+        padding: "20px",
+    },
+}));
 
 const DetailBox = styled(Box, {
     shouldForwardProp: (prop) => prop !== "isVisible",
@@ -30,7 +34,7 @@ const CustomStepper = styled(Stepper)({
     justifyContent: "space-between",
     width: "100%",
     maxWidth: "1200px",
-    padding: "0 24px",
+    padding: "0 20px",
     ".MuiStepConnector-line": {
         display: "none",
     },
@@ -68,7 +72,13 @@ export default function SchedulingInstructions() {
                 {steps.map((step, index) => (
                     <Step key={index} onClick={() => handleStepClick(index)} sx={{ cursor: "pointer" }}>
                         <CustomStepLabel>
-                            <Typography variant="h6">{step.label}</Typography>
+                            <Typography
+                                variant="h6"
+                                sx={{
+                                    fontSize: { xs: "1rem", sm: "1.25rem" },
+                                }}>
+                                    {step.label}
+                            </Typography>
                             <Typography variant="body2" color="textSecondary">{step.description}</Typography>
                         </CustomStepLabel>
                     </Step>

@@ -32,7 +32,6 @@ export default function Home() {
                 setProperties(response.data);
                 setActiveProperty(response.data[0]);
                 setLoading(false);
-                console.log((response.data[0]))
             } catch (err: any) {
                 console.error("Error fetching properties:", err);
                 setError("Could not fetch properties. Please try again later.");

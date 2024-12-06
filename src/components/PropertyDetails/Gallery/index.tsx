@@ -27,7 +27,7 @@ export default function Gallery({ images }: GalleryProps) {
             <ImageGallery
                 items={galleryItems}
                 showThumbnails
-                showNav
+                showNav={false}
                 showPlayButton={false}
                 thumbnailPosition="right"
                 slideOnThumbnailOver
