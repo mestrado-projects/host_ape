@@ -1,9 +1,11 @@
 import { useState, createContext, ReactNode, useEffect } from "react";
+import { DecodedToken } from "../hooks/useToken";
 
 export interface UserTokenContextType {
   token: string | false;
   setAndPersistToken: (token: string) => void;
   logout: () => void;
+  decodedToken?: DecodedToken | null;
 }
 
 export const UserToken = createContext<UserTokenContextType | undefined>(

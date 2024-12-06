@@ -18,6 +18,14 @@ interface AuthSignUpValues {
   password: string;
 }
 
+interface AuthUpdateValues {
+  id: string;
+  name?: string;
+  phone?: string;
+  email?: string;
+  password?: string;
+}
+
 interface ReservationData {
   [key: string]: any;
 }
@@ -34,6 +42,19 @@ function authLogin(values: AuthValues) {
 function authSignUp(values: AuthSignUpValues) {
   const { name, phone, email, password } = values;
   return axiosInstance.post("/guests/sign-up", { name, phone, email, password });
+}
+
+function getCustomer(id: string, token: string) {
+  return axiosInstance.get(`/guest/${id}`, config(token));
+}
+
+function updateCustomer(values: AuthUpdateValues, token: string) {
+  const { id, ...data } = values;
+  return axiosInstance.put(`/guest/${id}`, data, config(token));
+}
+
+function deleteCustomer(id: string, token: string) {
+  return axiosInstance.delete(`/guest/${id}`, config(token));
 }
 
 function getApartments() {
@@ -56,20 +77,18 @@ function createReservation(data: ReservationData, token: string) {
   return axiosInstance.post("/reservation/create", data, config(token));
 }
 
-const inputAddInformations = {
-  getApartments,
-  getApartmentById,
-};
-
+// Export API
 const api = {
   authLogin,
   authSignUp,
+  getCustomer,
+  updateCustomer,
+  deleteCustomer,
   getApartments,
   getApartmentById,
   getReservationById,
   requestReservation,
   createReservation,
-  inputAddInformations,
 };
 
 export default api;

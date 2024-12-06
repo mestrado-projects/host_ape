@@ -5,11 +5,11 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import PasswordInput from "../../components/inputs/PasswordInput";
 import CommonInput from "../../components/inputs/CommonInput";
 import api from "../../common/services";
-import logo from "../../common/assets/home.svg";
 import { ContainerCenterPage, InitContent, ContainerClicks } from "../../common/styles/StyleInitPages";
 import Footer from "../../components/Footer";
 import toast from "react-hot-toast";
 import validateRegistration from "../../validations/validateRegistration";
+import MainImage from "../../components/MainImage";
 
 interface Values {
   name: string;
@@ -71,7 +71,7 @@ export default function SignUp() {
   return (
     <>
       <InitContent>
-        <img height={300} width={300} src={logo} alt="logo" />
+        <MainImage />
         <ContainerCenterPage>
           <h2>Cadastro</h2>
           <form onSubmit={signUp}>
