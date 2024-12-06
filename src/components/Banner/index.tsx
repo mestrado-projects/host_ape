@@ -23,6 +23,14 @@ const BannerContainer = styled.div<{ $backgroundImage: string }>`
     background-position: center;
     position: relative;
     z-index: 1;
+
+    @media (max-width: 1024px) {
+        height: 400px;
+    }
+
+    @media (max-width: 600px) {
+        height: 300px;
+    }
 `;
 
 const Overlay = styled.div`
@@ -37,6 +45,7 @@ const Overlay = styled.div`
 const Content = styled.div`
     position: relative;
     text-align: center;
+    margin: 0 15px;
     z-index: 1;
 `;
 
@@ -51,10 +60,32 @@ export default function Banner({
         <BannerContainer $backgroundImage={backgroundImage}>
             <Overlay />
             <Content>
-                <Typography variant="h3" component="h1" gutterBottom>
+                <Typography
+                    variant="h3"
+                    component="h1"
+                    gutterBottom
+                    sx={{
+                        fontSize: {
+                            xs: "1.5rem",
+                            sm: "2rem",
+                            md: "2.5rem",
+                        },
+                    }}
+                >
                     {title}
                 </Typography>
-                <Typography variant="h6" component="p" gutterBottom>
+                <Typography
+                    variant="h6"
+                    component="p"
+                    gutterBottom
+                    sx={{
+                        fontSize: {
+                            xs: "1rem",
+                            sm: "1.25rem",
+                            md: "1.5rem",
+                        },
+                    }}
+                >
                     {subtitle}
                 </Typography>
                 {buttonText && (

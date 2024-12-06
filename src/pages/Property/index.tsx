@@ -67,7 +67,11 @@ const Column = styled(Box)({
     display: "flex",
     justifyContent: "space-between",
     gap: "32px",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+
+    "@media (min-width: 1024px)": {
+        display: "block",
+    },
 });
 
 const ImageColumn = styled(Box)({

@@ -9,7 +9,7 @@ interface CategoryFilterProps {
 
 export default function CategoryFilter({ categories, selectedCategory, onCategorySelect }: CategoryFilterProps) {
     return (
-        <Box display="flex" justifyContent={"center"} gap={1} marginBottom={3}>
+        <Box display="flex" flexWrap={"wrap"} justifyContent={"center"} gap={1} marginBottom={3} marginX={1}>
             {categories.map((category) => (
                 <Chip
                     key={category}
