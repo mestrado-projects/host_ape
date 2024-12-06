@@ -10,6 +10,7 @@ import Forms from "./pages/Forms";
 import Header from "./components/Header";
 import FaqPage from "./pages/FaqPage";
 import Property from "./pages/Property";
+import AccountPage from "./pages/AccountPage";
 
 const App: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const App: React.FC = () => {
               <Route path="/login" element={<SignIn />} />
               <Route path="/cadastro" element={<SignUp />} />
               <Route path="/register" element={<SignUp />} />
+              <Route path="/account" element={<AccountPage />} />
               <Route path="/forms" element={<Forms />} />
               <Route path="/" element={<Home />} />
               <Route path="/propriedade/:id" element={<Property />} />

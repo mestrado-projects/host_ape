@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Link, List, ListItem, ListItemText } from "@mui/material";
+import { Box, Typography, List, ListItem, ListItemText } from "@mui/material";
 import styled from "styled-components";
 import LoginForm from "../inputs/LoginForm";
 
