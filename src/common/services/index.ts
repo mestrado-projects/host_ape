@@ -11,6 +11,13 @@ interface AuthValues {
   password: string;
 }
 
+interface AuthSignUpValues {
+  name: string;
+  phone: string;
+  email: string;
+  password: string;
+}
+
 interface ReservationData {
   [key: string]: any;
 }
@@ -21,12 +28,12 @@ function config(token: string): AxiosRequestConfig {
 
 function authLogin(values: AuthValues) {
   const { email, password } = values;
-  return axiosInstance.post("/sign-in", { email, password });
+  return axiosInstance.post("/guests/sign-in", { email, password });
 }
 
-function authSignUp(values: AuthValues) {
-  const { email, password } = values;
-  return axiosInstance.post("/sign-up", { email, password });
+function authSignUp(values: AuthSignUpValues) {
+  const { name, phone, email, password } = values;
+  return axiosInstance.post("/guests/sign-up", { name, phone, email, password });
 }
 
 function getApartments() {

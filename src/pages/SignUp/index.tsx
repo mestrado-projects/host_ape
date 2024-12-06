@@ -4,15 +4,19 @@ import FormControl from "@mui/material/FormControl";
 import LoadingButton from "@mui/lab/LoadingButton";
 import PasswordInput from "../../components/inputs/PasswordInput";
 import CommonInput from "../../components/inputs/CommonInput";
-import valideRegistration from "../../validations/valideRegistration";
+import api from "../../common/services";
 import logo from "../../common/assets/home.svg";
 import { ContainerCenterPage, InitContent, ContainerClicks } from "../../common/styles/StyleInitPages";
 import Footer from "../../components/Footer";
+import toast from "react-hot-toast";
+import validateRegistration from "../../validations/validateRegistration";
 
 interface Values {
+  name: string;
+  phone: string;
+  email: string;
   password: string;
   confirmPassword: string;
-  email: string;
   showPassword: boolean;
 }
 
@@ -20,15 +24,12 @@ export default function SignUp() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const inputsConfident = [
-    { name: "Senha", nameState: "password" },
-    { name: "Confirme sua senha", nameState: "confirmPassword" },
-  ];
-
   const [values, setValues] = useState<Values>({
+    name: "",
+    phone: "",
+    email: "",
     password: "",
     confirmPassword: "",
-    email: "",
     showPassword: false,
   });
 
@@ -39,8 +40,32 @@ export default function SignUp() {
   async function signUp(event: FormEvent) {
     event.preventDefault();
     setLoading(true);
-    await valideRegistration(values, navigate);
-    setLoading(false);
+
+    const isValid = await validateRegistration(values, navigate);
+
+    if (!isValid) {
+      setLoading(false);
+      return;
+    }
+    
+    try {
+      await api.authSignUp({
+        name: values.name,
+        phone: values.phone,
+        email: values.email,
+        password: values.password,
+      });
+      toast.success("Cadastro realizado com sucesso! Faça login.");
+      navigate("/login");
+    } catch (error: any) {
+      console.error("Erro ao cadastrar:", error);
+      const errorMessage =
+      error.response?.data?.message || "Erro ao cadastrar. Verifique os dados e tente novamente.";
+  
+      toast.error(errorMessage);    
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -54,17 +79,33 @@ export default function SignUp() {
               <CommonInput
                 setValues={(field, value) => handleSetValues({ [field]: value })}
                 values={values}
+                inputLabel="Nome"
+                inputState="name"
+              />
+            </FormControl>
+            <FormControl fullWidth sx={{ m: 1 }} variant="outlined">
+              <CommonInput
+                setValues={(field, value) => handleSetValues({ [field]: value })}
+                values={values}
+                inputLabel="Telefone"
+                inputState="phone"
+              />
+            </FormControl>
+            <FormControl fullWidth sx={{ m: 1 }} variant="outlined">
+              <CommonInput
+                setValues={(field, value) => handleSetValues({ [field]: value })}
+                values={values}
                 inputLabel="Email"
                 inputState="email"
               />
             </FormControl>
-            {inputsConfident.map((input) => (
-              <FormControl fullWidth sx={{ m: 1 }} variant="outlined" key={input.nameState}>
+            {["Senha", "Confirme sua senha"].map((label, index) => (
+              <FormControl fullWidth sx={{ m: 1 }} variant="outlined" key={index}>
                 <PasswordInput
                   setValues={(field, value) => handleSetValues({ [field]: value })}
                   values={values}
-                  inputLabel={input.name}
-                  inputState={input.nameState}
+                  inputLabel={label}
+                  inputState={index === 0 ? "password" : "confirmPassword"}
                 />
               </FormControl>
             ))}

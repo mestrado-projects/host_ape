@@ -52,7 +52,7 @@ export default function PropertiesCard({ title, description, thumb, active = fal
                         backgroundColor: "#e0e0e0",
                     }}
                 />
-                <CardContent sx={{ textAlign: "center" }}>
+                <CardContent sx={{ textAlign: "center", minHeight: "150px" }}>
                     <Typography variant="h6" component="h3" gutterBottom>
                         {title}
                     </Typography>

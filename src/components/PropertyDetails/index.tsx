@@ -6,6 +6,7 @@ import Gallery from "./Gallery";
 import api from "../../common/services";
 import { Property } from "../../pages/Home";
 import InfoSection from "../InfoSection";
+import useToken from "../../common/hooks/useToken";
 
 export interface PropertyDetailed {
     id: string;
@@ -46,6 +47,7 @@ const LoadingContainer = styled(Box)({
 export default function PropertyDetails({ propertyInfo }: PropertyDetailsProps) {
     const [property, setProperty] = useState<PropertyDetailed | null>(null);
     const [loading, setLoading] = useState(true);
+    const { token } = useToken();
 
     useEffect(() => {
         async function fetchProperty() {
@@ -84,7 +86,7 @@ export default function PropertyDetails({ propertyInfo }: PropertyDetailsProps) 
                 <InfoColumn property={property} />
                 <Gallery images={property.images} />
             </Container>
-            <InfoSection property={property} isLoggedIn={true} />
+            <InfoSection property={property} isLoggedIn={!!token} />
         </>
     );
 }
