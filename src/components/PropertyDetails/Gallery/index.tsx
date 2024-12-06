@@ -1,12 +1,10 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
-import styled from "styled-components";
+import { Box, styled } from "@mui/material";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
-import { Property } from "../../../pages/Home";
 
-interface PropertyDetailsProps {
-    property: Property;
+interface GalleryProps {
+    images: Array<{ id: number; image_name: string; url: string; image_type: string }>;
 }
 
 const ImageColumn = styled(Box)({
@@ -16,40 +14,23 @@ const ImageColumn = styled(Box)({
     alignItems: "center",
 });
 
-export default function Gallery({ property }: PropertyDetailsProps) {
-    const images = [
-        {
-            original: "https://via.placeholder.com/400x300",
-            thumbnail: "https://via.placeholder.com/400x300",
-        },
-        {
-            original: "https://via.placeholder.com/400x300",
-            thumbnail: "https://via.placeholder.com/400x300",
-        },
-        {
-            original: "https://via.placeholder.com/400x300",
-            thumbnail: "https://via.placeholder.com/400x300",
-        },
-        {
-            original: "https://via.placeholder.com/400x300",
-            thumbnail: "https://via.placeholder.com/400x300",
-        },
-    ];
+export default function Gallery({ images }: GalleryProps) {
+    const filteredImages = images.filter((image) => image.image_type !== "Thumb");
+
+    const galleryItems = filteredImages.map((image) => ({
+        original: image.url,
+        thumbnail: image.url,
+    }));
 
     return (
         <ImageColumn>
-            {/* <Typography variant="subtitle2" color="textSecondary" gutterBottom>
-                Reserva: {property.checkIn} - {property.checkOut}
-            </Typography> */}
-
             <ImageGallery
-                items={images}
-                showThumbnails={true}
-                showNav={false}
+                items={galleryItems}
+                showThumbnails
+                showNav
                 showPlayButton={false}
-                showFullscreenButton={true}
                 thumbnailPosition="right"
-                slideOnThumbnailOver={true}
+                slideOnThumbnailOver
             />
         </ImageColumn>
     );

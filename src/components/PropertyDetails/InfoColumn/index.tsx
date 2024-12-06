@@ -1,10 +1,11 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import styled from "styled-components";
-import { Property } from "../../../pages/Home";
+import { useNavigate } from "react-router-dom";
+import { PropertyDetailed } from "../index";
 
 interface PropertyDetailsProps {
-    property: Property;
+    property: PropertyDetailed;
 }
 
 const TextColumn = styled(Box)({
@@ -20,31 +21,37 @@ const IconInfo = styled(Typography)({
 });
 
 export default function InfoColumn({ property }: PropertyDetailsProps) {
+    const navigate = useNavigate();
+
+    const handleViewMore = () => {
+        navigate(`/propriedade/${property.id}`);
+    };
+
     return (
         <TextColumn>
             <Typography variant="subtitle2" color="textSecondary" gutterBottom>
-                Subtitle, explicando que é sobre o apartamento selecionado
+                Informações sobre o apartamento selecionado
             </Typography>
             <Typography variant="h4" gutterBottom>
                 {property.name}
             </Typography>
-            
+
             <Box mb={2}>
-                <IconInfo>📍 Location + Info</IconInfo>
-                <IconInfo>🛏️ Beds + Info</IconInfo>
-                <IconInfo>🍽️ Kitchen + Info</IconInfo>
-                <IconInfo>🛁 Bath + Info</IconInfo>
+                <IconInfo>📍 {property.simpleLocation}</IconInfo>
+                <IconInfo>🛏️ {property.beds} camas</IconInfo>
+                <IconInfo>🍽️ {property.kitchen ? "Cozinha disponível" : "Sem cozinha"}</IconInfo>
+                <IconInfo>🛁 {property.bathroom} banheiros</IconInfo>
             </Box>
 
             <Typography variant="h6" gutterBottom>
                 Sobre
             </Typography>
             <Typography variant="body1" color="textSecondary" paragraph>
-                {property.description}
+                {property.about}
             </Typography>
 
-            <Button variant="text" color="primary">
-                Ver mais
+            <Button variant="text" color="primary" onClick={handleViewMore}>
+                Ver Mais
             </Button>
         </TextColumn>
     );

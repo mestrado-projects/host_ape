@@ -1,53 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropertiesCards from "../../components/PropertiesCards";
 import PropertyDetails from "../../components/PropertyDetails";
-import InfoSection from "../../components/InfoSection";
 import Banner from "../../components/Banner";
 import LocalGuideSlider from "../../components/LocalGuideSlider";
 import ScheduleGuide from "../../components/ScheduleGuide";
-import Image from './assets/banner.jpg'
 import FAQs from "../../components/Faq";
 import Footer from "../../components/Footer";
+import api from "../../common/services";
+import Image from "./assets/banner.jpg";
 
 export interface Property {
-    id: number;
+    id: string;
     name: string;
-    location: string;
-    description: string;
-    checkIn: string;
-    checkOut: string;
-    active?: boolean;
+    simpleLocation: string;
+    basicPrice: number;
+    type: string;
+    imageThumbUrl: string;
 }
 
-const propertiesData: Property[] = [
-    {
-        id: 1,
-        name: "Luxury Apartment",
-        location: "Downtown",
-        description: "Aproveite tudo o que o litoral norte paraibano oferece! A 200 metros da praia...",
-        checkIn: "2024-11-17",
-        checkOut: "2024-11-22",
-    },
-    {
-        id: 2,
-        name: "Beachside Condo",
-        location: "Seaside",
-        description: "Desfrute de uma vista espetacular do oceano em nosso condomínio à beira-mar...",
-        checkIn: "2024-12-01",
-        checkOut: "2024-12-05",
-    },
-    {
-        id: 3,
-        name: "Cozy Cabin",
-        location: "Mountain",
-        description: "Relaxe em uma cabana aconchegante nas montanhas com fácil acesso a trilhas...",
-        checkIn: "2024-12-10",
-        checkOut: "2024-12-15",
-    },
-];
-
 export default function Home() {
-    const [activeProperty, setActiveProperty] = useState<Property>(propertiesData[0]);
+    const [properties, setProperties] = useState<Property[]>([]);
+    const [activeProperty, setActiveProperty] = useState<Property | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchProperties = async () => {
+            try {
+                setLoading(true);
+                const response = await api.getApartments();
+                setProperties(response.data);
+                setActiveProperty(response.data[0]);
+                setLoading(false);
+                console.log((response.data[0]))
+            } catch (err: any) {
+                console.error("Error fetching properties:", err);
+                setError("Could not fetch properties. Please try again later.");
+                setLoading(false);
+            }
+        };
+        fetchProperties();
+    }, []);
 
     const handleSetActiveProperty = (property: Property) => {
         setActiveProperty(property);
@@ -62,12 +55,12 @@ export default function Home() {
             />
             <ScheduleGuide />
             <PropertiesCards
-                properties={propertiesData}
+                properties={properties}
                 activeProperty={activeProperty}
+                loading={loading}
                 setActiveProperty={handleSetActiveProperty}
             />
-            <PropertyDetails property={activeProperty} />
-            <InfoSection />
+            {activeProperty && <PropertyDetails propertyInfo={activeProperty} />}
             <LocalGuideSlider />
             <FAQs preview={true} />
             <Footer />

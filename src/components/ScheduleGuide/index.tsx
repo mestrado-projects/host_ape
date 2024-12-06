@@ -10,7 +10,9 @@ const Container = styled(Box)({
     alignItems: "center",
 });
 
-const DetailBox = styled(Box)<{ isVisible: boolean }>(({ isVisible }) => ({
+const DetailBox = styled(Box, {
+    shouldForwardProp: (prop) => prop !== "isVisible",
+})<{ isVisible: boolean }>(({ isVisible }) => ({
     marginTop: "16px",
     padding: "16px",
     backgroundColor: "#f0f0f0",

@@ -4,11 +4,12 @@ import { Card, CardContent, Typography, Box, Chip, CardActionArea } from "@mui/m
 interface PropertiesCardProps {
     title: string;
     description: string;
+    thumb: string;
     active?: boolean;
     onClick: () => void;
 }
 
-export default function PropertiesCard({ title, description, active = false, onClick }: PropertiesCardProps) {
+export default function PropertiesCard({ title, description, thumb, active = false, onClick }: PropertiesCardProps) {
     return (
         <Card
             variant="outlined"
@@ -39,21 +40,18 @@ export default function PropertiesCard({ title, description, active = false, onC
                     />
                 )}
                 <Box
+                    component="img"
+                    src={thumb}
+                    alt={title}
                     sx={{
-                        width: 100,
-                        height: 100,
+                        width: "100%",
+                        height: "150px",
+                        objectFit: "cover",
+                        borderTopLeftRadius: "4px",
+                        borderTopRightRadius: "4px",
                         backgroundColor: "#e0e0e0",
-                        borderRadius: 1,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: "2rem",
-                        color: "#a0a0a0",
-                        margin: "16px auto 12px",
                     }}
-                >
-                    🖼️
-                </Box>
+                />
                 <CardContent sx={{ textAlign: "center" }}>
                     <Typography variant="h6" component="h3" gutterBottom>
                         {title}

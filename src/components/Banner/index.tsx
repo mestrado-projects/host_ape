@@ -10,7 +10,7 @@ interface BannerProps {
     onButtonClick?: () => void;
 }
 
-const BannerContainer = styled.div<{ backgroundImage: string }>`
+const BannerContainer = styled.div<{ $backgroundImage: string }>`
     height: 500px;
     display: flex;
     flex-direction: column;
@@ -18,7 +18,7 @@ const BannerContainer = styled.div<{ backgroundImage: string }>`
     align-items: center;
     text-align: center;
     color: white;
-    background-image: url(${(props) => props.backgroundImage});
+    background-image: url(${(props) => props.$backgroundImage});
     background-size: cover;
     background-position: center;
     position: relative;
@@ -48,21 +48,21 @@ export default function Banner({
     onButtonClick,
 }: BannerProps) {
     return (
-        <BannerContainer backgroundImage={backgroundImage}>
-        <Overlay />
-        <Content>
-            <Typography variant="h3" component="h1" gutterBottom>
-            {title}
-            </Typography>
-            <Typography variant="h6" component="p" gutterBottom>
-            {subtitle}
-            </Typography>
-            {buttonText && (
-            <Button variant="contained" color="primary" onClick={onButtonClick}>
-                {buttonText}
-            </Button>
-            )}
-        </Content>
+        <BannerContainer $backgroundImage={backgroundImage}>
+            <Overlay />
+            <Content>
+                <Typography variant="h3" component="h1" gutterBottom>
+                    {title}
+                </Typography>
+                <Typography variant="h6" component="p" gutterBottom>
+                    {subtitle}
+                </Typography>
+                {buttonText && (
+                    <Button variant="contained" color="primary" onClick={onButtonClick}>
+                        {buttonText}
+                    </Button>
+                )}
+            </Content>
         </BannerContainer>
     );
 }
